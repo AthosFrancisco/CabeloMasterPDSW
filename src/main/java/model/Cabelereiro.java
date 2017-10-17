@@ -18,9 +18,19 @@ import javax.persistence.*;
 @DiscriminatorValue(value = "CABELEREIRO")
 @PrimaryKeyJoinColumn(name = "ID_USUARIO", referencedColumnName = "ID")
 public class Cabelereiro extends Usuario implements Serializable{
+
+    public Cabelereiro() {
+    }
+
+    public Cabelereiro(String nome, String cpf, String email, String senha, char sexo) {
+        super(nome, cpf, email, senha, sexo);
+    }
     
     @OneToMany(mappedBy = "cabelereiro", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Atendimento> atendimento;
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Gerente gerente;
 
     public List<Atendimento> getAtendimento() {
         return atendimento;
@@ -29,4 +39,14 @@ public class Cabelereiro extends Usuario implements Serializable{
     public void setAtendimento(List<Atendimento> atendimento) {
         this.atendimento = atendimento;
     }
+
+    public Gerente getGerente() {
+        return gerente;
+    }
+
+    public void setGerente(Gerente gerente) {
+        this.gerente = gerente;
+    }
+    
+    
 }

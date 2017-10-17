@@ -12,6 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <a href="cadastroCabelereiro.jsp">Cadastrar Cabelereiro</a>
         <h1>Hello World! ${sessionScope.usuario.nome}</h1>
+        
     </body>
 </html>

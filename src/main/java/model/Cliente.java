@@ -17,6 +17,15 @@ import javax.persistence.*;
 @DiscriminatorValue(value = "CLIENTE")
 @PrimaryKeyJoinColumn(name = "ID_USUARIO", referencedColumnName = "ID")
 public class Cliente extends Usuario{
+
+    public Cliente() {
+    }
+
+    public Cliente(String nome, String cpf, String email, String senha, char sexo) {
+        super(nome, cpf, email, senha, sexo);
+    }
+    
+    
     
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Atendimento> atendimento;

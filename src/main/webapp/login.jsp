@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
         <form method="post" action="LoginController">
             <fieldset>
                 <legend>Login</legend>
@@ -28,5 +29,6 @@
                 <input type="submit" value="enviar"/>
             </fieldset>
         </form>
+        <a href="cadastro.jsp"> Cadastrar</a>
     </body>
 </html>

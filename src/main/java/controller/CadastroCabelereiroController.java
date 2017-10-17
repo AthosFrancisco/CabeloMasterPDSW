@@ -12,16 +12,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Cabelereiro;
 import model.Cliente;
 import model.Endereco;
+import model.Gerente;
 import model.JPAUtil;
 
 /**
  *
  * @author Athos
  */
-@WebServlet(name = "CadastroController", urlPatterns = {"/CadastroController"})
-public class CadastroController extends HttpServlet {
+@WebServlet(name = "CadastroCabelereiroController", urlPatterns = {"/CadastroCabelereiroController"})
+public class CadastroCabelereiroController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,15 +42,13 @@ public class CadastroController extends HttpServlet {
         String cidade = request.getParameter("cidade");
         String estado = request.getParameter("estado");
         
-        Cliente cliente = new Cliente(nome, cpf, email, senha, sexo);
-        cliente.setEndereco(new Endereco(cep, logradouro, bairro, numero, complemento, cidade, estado));
+        Cabelereiro cab = new Cabelereiro(nome, cpf, email, senha, sexo);
+        cab.setEndereco(new Endereco(cep, logradouro, bairro, numero, complemento, cidade, estado));
         
-        EntityManager em = JPAUtil.getEntityManager();
+        Integer id = ((Gerente) request.getSession().getAttribute("usuario")).getId();
+        Gerente g = new RetornaUsuario().getGerente(id);
         
-        em.getTransaction().begin();
-        em.persist(cliente);
-        em.getTransaction().commit();
-        em.clear();
+        g.cadastrarCabelereiro(cab);
     }
 
 

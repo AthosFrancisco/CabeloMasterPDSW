@@ -29,10 +29,10 @@ public class TesteConexao {
 //        em.close();
 
 //        Gerente g = em.find(Gerente.class, 1);
-        Query q = em.createQuery("select g from Gerente g where g.nome = :nome and g.senha = :senha");
-        q.setParameter("nome", "athos@gmail.com");
-        q.setParameter("senha", "123");
-        
-        Gerente g = (Gerente) q.getSingleResult();
+//        Query q = em.createQuery("select g from Gerente g where g.nome = :nome and g.senha = :senha");
+//        q.setParameter("nome", "athos@gmail.com");
+//        q.setParameter("senha", "123");
+//        
+//        Gerente g = (Gerente) q.getSingleResult();
     }
 }

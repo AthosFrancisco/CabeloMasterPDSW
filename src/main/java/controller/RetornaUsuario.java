@@ -18,6 +18,9 @@ import model.JPAUtil;
  */
 public class RetornaUsuario {
     
+    public RetornaUsuario(){
+    }
+    
     public RetornaUsuario(String login, String senha){
         this.login = login;
         this.senha = senha;
@@ -59,5 +62,19 @@ public class RetornaUsuario {
         
         return (Cliente) q.getSingleResult();
     }
-}
 
+    public Gerente getGerente(Integer id){
+        em = JPAUtil.getEntityManager();
+        return em.find(Gerente.class, id);
+    }
+    
+    public Cabelereiro getCabelereiro(Integer id){
+        em = JPAUtil.getEntityManager();
+        return em.find(Cabelereiro.class, id);
+    }
+    
+    public Cliente getCliente(Integer id){
+        em = JPAUtil.getEntityManager();
+        return em.find(Cliente.class, id);
+    }
+}
