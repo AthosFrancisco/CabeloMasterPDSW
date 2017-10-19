@@ -21,17 +21,17 @@ import model.JPAUtil;
  *
  * @author Athos
  */
-@WebServlet(name = "CadastroCabelereiroController", urlPatterns = {"/CadastroCabelereiroController"})
-public class CadastroCabelereiroController extends HttpServlet {
+@WebServlet(name = "CabelereiroController", urlPatterns = {"/CabelereiroController"})
+public class CabelereiroController extends HttpServlet {
+
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        Integer id = Integer.parseInt(request.getParameter("codigo"));
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        String cpf = request.getParameter("cpf");
-        char sexo = request.getParameter("sexo").charAt(0);
         
         String cep = request.getParameter("cep");
         String logradouro = request.getParameter("logradouro");
@@ -41,30 +41,32 @@ public class CadastroCabelereiroController extends HttpServlet {
         String cidade = request.getParameter("cidade");
         String estado = request.getParameter("estado");
         
-        Integer id = ((Gerente) request.getSession().getAttribute("usuario")).getId();
-        Gerente g = new RetornaUsuario().getGerente(id);
-        
-        Cabelereiro cab = new Cabelereiro(nome, cpf, email, senha, sexo);
+        Integer idGerente = ((Gerente) request.getSession().getAttribute("usuario")).getId();
+        Gerente g = new RetornaUsuario().getGerente(idGerente);
+
+        Cabelereiro cab = new RetornaUsuario().getCabelereiro(id);
+        cab.setNome(nome);
+        cab.setEmail(email);
+        cab.setSenha(senha);
         cab.setEndereco(new Endereco(cep, logradouro, bairro, numero, complemento, cidade, estado));
         cab.setGerente(g);
         
-        EntityManager em = JPAUtil.getInstance().getEntityManager();
-        //em.clear();
-        em.getTransaction().begin();
-        g.setCabelereiro(cab);
-        em.getTransaction().commit();
-        g.getCabelereiro();
-        
+        if(g.getCabelereiro().contains(cab)){
+            EntityManager em = JPAUtil.getInstance().getEntityManager();
+            //em.clear();
+            em.getTransaction().begin();
+            em.merge(cab);
+            em.getTransaction().commit();
+        }
         
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

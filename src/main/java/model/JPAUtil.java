@@ -13,15 +13,23 @@ import javax.persistence.*;
  */
 public class JPAUtil {
     
-    private static EntityManagerFactory emf;
-    private static EntityManager em;
-    
-    static{
+    protected JPAUtil(){
         emf = Persistence.createEntityManagerFactory("bancomaster");
         em = emf.createEntityManager();
     }
     
-    public static EntityManager getEntityManager(){
+    public static JPAUtil instancia;
+    private static EntityManagerFactory emf;
+    private static EntityManager em;
+    
+    public static JPAUtil getInstance(){
+        if(instancia == null){
+            instancia =  new JPAUtil();
+        }
+        return instancia;
+    }
+
+    public EntityManager getEntityManager(){
         return em;
     }
 }

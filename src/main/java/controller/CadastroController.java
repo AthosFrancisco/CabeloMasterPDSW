@@ -43,12 +43,14 @@ public class CadastroController extends HttpServlet {
         Cliente cliente = new Cliente(nome, cpf, email, senha, sexo);
         cliente.setEndereco(new Endereco(cep, logradouro, bairro, numero, complemento, cidade, estado));
         
-        EntityManager em = JPAUtil.getEntityManager();
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
         
+        em.clear();
         em.getTransaction().begin();
         em.persist(cliente);
         em.getTransaction().commit();
-        em.clear();
+        
+        
     }
 
 

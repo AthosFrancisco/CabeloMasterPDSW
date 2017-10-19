@@ -32,7 +32,7 @@ public class RetornaUsuario {
     
     public Gerente getGerente(){
         
-        em = JPAUtil.getEntityManager();
+        em = JPAUtil.getInstance().getEntityManager();
         
         Query q = em.createQuery("select g from Gerente g where g.email = :login and g.senha = :senha");
         q.setParameter("login", login);
@@ -41,9 +41,11 @@ public class RetornaUsuario {
         return (Gerente) q.getSingleResult();
     }
     
+    static{
+        em = JPAUtil.getInstance().getEntityManager();
+    }
+    
     public Cabelereiro getCabelereiro(){
-        
-        em = JPAUtil.getEntityManager();
         
         Query q = em.createQuery("select c from Cabelereiro c where c.email = :login and c.senha = :senha");
         q.setParameter("login", login);
@@ -54,8 +56,6 @@ public class RetornaUsuario {
     
     public Cliente getCliente(){
         
-        em = JPAUtil.getEntityManager();
-        
         Query q = em.createQuery("select c from Cliente c where c.email = :login and c.senha = :senha");
         q.setParameter("login", login);
         q.setParameter("senha", senha);
@@ -64,17 +64,14 @@ public class RetornaUsuario {
     }
 
     public Gerente getGerente(Integer id){
-        em = JPAUtil.getEntityManager();
         return em.find(Gerente.class, id);
     }
     
     public Cabelereiro getCabelereiro(Integer id){
-        em = JPAUtil.getEntityManager();
         return em.find(Cabelereiro.class, id);
     }
     
     public Cliente getCliente(Integer id){
-        em = JPAUtil.getEntityManager();
         return em.find(Cliente.class, id);
     }
 }

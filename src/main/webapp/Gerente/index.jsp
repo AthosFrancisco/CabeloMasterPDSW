@@ -13,6 +13,7 @@
     </head>
     <body>
         <a href="cadastroCabelereiro.jsp">Cadastrar Cabelereiro</a>
+        <a href="../ListarCabelereiros">Listar Cabelereiros</a>
         <h1>Hello World! ${sessionScope.usuario.nome}</h1>
         
     </body>
