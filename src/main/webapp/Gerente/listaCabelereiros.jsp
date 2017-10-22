@@ -13,15 +13,16 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <a href="Gerente/cadastroCabelereiro.jsp">Cadastrar Cabelereiro</a>
         <h1>lista de Cabelereiro!</h1>
         
         <c:forEach var="func" items="${requestScope.lista}">
-            <form action="VerCabelereiroController" method="post">
-                <input name="codigo" vale="${func.id}" type="text" style="display: none"/>
+            <form action="CabelereiroController" method="get">
+                <input name="codigo" value="${func.id}" type="text" style="display: none"/>
                 Código Funcionário: ${func.id}<br/>
                 Nome do Funcionário: ${func.nome}<br/>
                 <input type="submit" value="editar"/>
-                <input type="submit" value="excluir"/>
+                <button type="button"><a href="ExcluirCabelereiroController?codigo=${func.id}">excluir</a></button>
             </form>
                 
         </c:forEach>

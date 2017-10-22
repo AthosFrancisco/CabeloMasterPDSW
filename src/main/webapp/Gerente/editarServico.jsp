@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 16/10/2017, 20:51:59
+    Document   : editarServico
+    Created on : 22/10/2017, 15:53:30
     Author     : Athos
 --%>
 
@@ -12,9 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="../ListarCabelereiros">Listar Cabelereiros</a>
-        <a href="../ListarServicos">Listar Serviços</a>
-        <h1>Hello World! ${sessionScope.usuario.nome}</h1>
-        
+        <h1>Hello World!</h1>
     </body>
 </html>

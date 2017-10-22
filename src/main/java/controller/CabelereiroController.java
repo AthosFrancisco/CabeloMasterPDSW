@@ -24,7 +24,6 @@ import model.JPAUtil;
 @WebServlet(name = "CabelereiroController", urlPatterns = {"/CabelereiroController"})
 public class CabelereiroController extends HttpServlet {
 
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -32,7 +31,7 @@ public class CabelereiroController extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        
+
         String cep = request.getParameter("cep");
         String logradouro = request.getParameter("logradouro");
         String bairro = request.getParameter("bairro");
@@ -40,7 +39,7 @@ public class CabelereiroController extends HttpServlet {
         String complemento = request.getParameter("complemento");
         String cidade = request.getParameter("cidade");
         String estado = request.getParameter("estado");
-        
+
         Integer idGerente = ((Gerente) request.getSession().getAttribute("usuario")).getId();
         Gerente g = new RetornaUsuario().getGerente(idGerente);
 
@@ -50,22 +49,29 @@ public class CabelereiroController extends HttpServlet {
         cab.setSenha(senha);
         cab.setEndereco(new Endereco(cep, logradouro, bairro, numero, complemento, cidade, estado));
         cab.setGerente(g);
-        
-        if(g.getCabelereiro().contains(cab)){
+
+        if (g.getCabelereiro().contains(cab)) {
             EntityManager em = JPAUtil.getInstance().getEntityManager();
-            //em.clear();
+            em.clear();
             em.getTransaction().begin();
             em.merge(cab);
             em.getTransaction().commit();
         }
-        
+ 
+        request.setAttribute("lista", g.getCabelereiro());
+        request.getRequestDispatcher("Gerente/listaCabelereiros.jsp").forward(request, response);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        Gerente g = new RetornaUsuario().getGerente(((Gerente)request.getSession().getAttribute("usuario")).getId());
+        Integer id = Integer.parseInt(request.getParameter("codigo"));
         
-        
+        request.setAttribute("cab", g.verCabelereiro(id));
+
+        request.getRequestDispatcher("Gerente/editarCabelereiro.jsp").forward(request, response);
     }
 
     @Override

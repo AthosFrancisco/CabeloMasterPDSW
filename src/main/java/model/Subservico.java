@@ -14,6 +14,14 @@ import javax.persistence.*;
  */
 @Embeddable
 public class Subservico implements Serializable{
+
+    public Subservico() {
+    }
+
+    public Subservico(String nome, Float valor) {
+        this.nome = nome;
+        this.valor = valor;
+    }
     
     @Column(name = "TXT_NOME", nullable = false)
     private String nome;

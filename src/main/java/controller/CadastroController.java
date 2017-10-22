@@ -50,7 +50,9 @@ public class CadastroController extends HttpServlet {
         em.persist(cliente);
         em.getTransaction().commit();
         
+        request.getSession().setAttribute("usuario", cliente);
         
+        response.sendRedirect("Cliente/index.jsp");
     }
 
 

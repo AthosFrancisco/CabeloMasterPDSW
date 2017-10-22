@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -18,13 +19,18 @@ import javax.persistence.*;
 @Table(name = "TB_SERVICO")
 public class Servico implements Serializable{
 
-    public Integer getId() {
-        return id;
+    public Servico() {
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Servico(String nomeServico, String descricao, Date tempoMedioAtendimento, Date pausa, Date tempoRestanteAtendimento) {
+        this.nomeServico = nomeServico;
+        this.descricao = descricao;
+        this.tempoMedioAtendimento = tempoMedioAtendimento;
+        this.pausa = pausa;
+        this.tempoRestanteAtendimento = tempoRestanteAtendimento;
     }
+    
+    
     
     @Id
     @SequenceGenerator(name = "SEQ_ID", allocationSize = 20, initialValue = 1)
@@ -54,6 +60,14 @@ public class Servico implements Serializable{
     @Column(name = "SUBSERVICOS")
     private List<Subservico> subServ;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
     public String getNomeServico() {
         return nomeServico;
     }
@@ -98,7 +112,10 @@ public class Servico implements Serializable{
         return subServ;
     }
 
-    public void setSubServ(List<Subservico> subServ) {
-        this.subServ = subServ;
+    public void setSubServ(Subservico subServ) {
+        if(this.subServ == null){
+            this.subServ = new ArrayList<>();
+        }
+        this.subServ.add(subServ);
     }
 }

@@ -41,6 +41,46 @@ public class Gerente extends Usuario implements Serializable{
         this.cabelereiro.add(cabelereiro);
     }
     
+    public Cabelereiro verCabelereiro(Integer id){
+        Cabelereiro cabExiste = null;
+        for(Cabelereiro c:this.cabelereiro){
+            if(c.getId() == id){
+                cabExiste = c;
+                break;
+            }
+        }
+        return cabExiste;
+    }
     
+    public void excluirCabelereiro(Cabelereiro c){
+        
+        if(this.cabelereiro.contains(c)){
+            
+            EntityManager em = JPAUtil.getInstance().getEntityManager();
+            em.clear();
+            em.getTransaction().begin();
+            c = em.find(Cabelereiro.class, c.getId());
+            em.remove(c);
+            em.getTransaction().commit();
+        }
+    }
     
+    public void cadastrarServico(Servico servico){
+        
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        em.clear();
+        em.getTransaction().begin();
+        em.persist(servico);
+        em.getTransaction().commit();
+    }
+    
+    public void excluirServico(Servico servico){
+        
+        EntityManager em = JPAUtil.getInstance().getEntityManager();
+        em.clear();
+        em.getTransaction().begin();
+        servico = em.find(Servico.class, servico.getId());
+        em.remove(servico);
+        em.getTransaction().commit();
+    }
 }

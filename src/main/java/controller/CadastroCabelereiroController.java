@@ -53,9 +53,8 @@ public class CadastroCabelereiroController extends HttpServlet {
         em.getTransaction().begin();
         g.setCabelereiro(cab);
         em.getTransaction().commit();
-        g.getCabelereiro();
         
-        
+        request.getRequestDispatcher("ListarCabelereiros").forward(request, response);
     }
 
 

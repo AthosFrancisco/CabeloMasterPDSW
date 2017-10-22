@@ -9,14 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script src="../js/cadastro.js" type="text/javascript"></script>
+        <script src="js/cadastro.js" type="text/javascript"></script>
         <title>JSP Page</title>
     </head>
     <body>
         <h1>Editar Cadastro</h1>
-        <form method="post" action="../CabelereiroController">
+        <form method="post" action="CabelereiroController">
             <fieldset>
                 <legend>Dados Pessoais</legend>
+                <label for="codigo">Código:</label>
+                <input type="number" name="codigo" value="${requestScope.cab.id}" readonly="readonly"/>
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" value="${requestScope.cab.nome}"/>
                 <label for="cpf">Cpf:</label>

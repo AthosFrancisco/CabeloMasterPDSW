@@ -6,30 +6,37 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Gerente;
 import model.Cabelereiro;
+import model.JPAUtil;
 
 /**
  *
  * @author Athos
  */
-@WebServlet(name = "VerCabelereiroController", urlPatterns = {"/VerCabelereiroController"})
-public class VerCabelereiroController extends HttpServlet {
+@WebServlet(name = "ExcluirCabelereiroController", urlPatterns = {"/ExcluirCabelereiroController"})
+public class ExcluirCabelereiroController extends HttpServlet {
+
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         Integer id = Integer.parseInt(request.getParameter("codigo"));
-        Cabelereiro cab = new RetornaUsuario().getCabelereiro(id);
         
-        request.setAttribute("cab", cab);
+        Cabelereiro c = new RetornaUsuario().getCabelereiro(id);
         
-        response.sendRedirect("/Gerente/editarCabelereiro.jsp");
+        Gerente g = new RetornaUsuario().getGerente(((Gerente) request.getSession().getAttribute("usuario")).getId());
+        
+        g.excluirCabelereiro(c);
+        
+        request.getRequestDispatcher("Gerente/ListarCabelereiros").forward(request, response);
     }
 
 }

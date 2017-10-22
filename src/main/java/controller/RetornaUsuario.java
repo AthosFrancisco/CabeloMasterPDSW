@@ -19,11 +19,14 @@ import model.JPAUtil;
 public class RetornaUsuario {
     
     public RetornaUsuario(){
+        em = JPAUtil.getInstance().getEntityManager();
     }
     
     public RetornaUsuario(String login, String senha){
         this.login = login;
         this.senha = senha;
+        
+        em = JPAUtil.getInstance().getEntityManager();
     }
     
     private static String login;
@@ -32,17 +35,11 @@ public class RetornaUsuario {
     
     public Gerente getGerente(){
         
-        em = JPAUtil.getInstance().getEntityManager();
-        
         Query q = em.createQuery("select g from Gerente g where g.email = :login and g.senha = :senha");
         q.setParameter("login", login);
         q.setParameter("senha", senha);
         
         return (Gerente) q.getSingleResult();
-    }
-    
-    static{
-        em = JPAUtil.getInstance().getEntityManager();
     }
     
     public Cabelereiro getCabelereiro(){
