@@ -24,9 +24,6 @@ public class Atendimento implements Serializable{
     @GeneratedValue(generator = "SEQ_ID")
     private Integer id;
     
-    @Column(nullable = false)
-    private boolean disponivel;
-    
     @Column(name = "DT_DIA", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dia;
@@ -100,14 +97,6 @@ public class Atendimento implements Serializable{
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public boolean isDisponivel() {
-        return disponivel;
-    }
-
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
     }
 
     public Servico getServico() {
