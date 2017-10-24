@@ -35,14 +35,18 @@ function submeterFormulario(){
 
 function adicionarSubservico(){
     
-    var a = "<form>";
-    a += "Nome: <input type=\"text\" name=\"nome\"/>";
-    a += "Valor: <input type=\"text\" name=\"valor\"/>";
-    a += "</form>";
+    var nome = document.createElement("INPUT");
+    nome.name = "nomeServico";
+    nome.type = "text";
+    
+    var valor = document.createElement("INPUT");
+    valor.name = "valorServico";
+    valor.type = "text";
     
     var subservico = document.getElementById("subservicos");
     
-    subservico.innerHTML += a;
+    subservico.appendChild(nome);
+    subservico.appendChild(valor);
 }
 
 onload = function(){

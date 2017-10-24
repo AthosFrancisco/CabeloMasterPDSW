@@ -14,6 +14,7 @@
     <body>
         <a href="../ListarCabelereiros">Listar Cabelereiros</a>
         <a href="../ListarServicos">Listar Serviços</a>
+        <a href="../LoginController">Sair</a>
         <h1>Hello World! ${sessionScope.usuario.nome}</h1>
         
     </body>

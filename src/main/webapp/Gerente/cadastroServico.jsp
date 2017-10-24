@@ -27,12 +27,12 @@
             <input name="temporestante" type="time"/>
         </form>
         
-        <span id="subservicos">
-                
-        </span>
-        
         <button type="button" id="botao">Adicionar Subserviço</button>
         
+        <div id="subservicos">
+                
+        </div>
+
         <button type="submit" id="submeter">Enviar</button>
     </body>
 </html>

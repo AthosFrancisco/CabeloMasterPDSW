@@ -23,47 +23,42 @@ import model.Gerente;
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        HttpSession sessao = request.getSession();
-        
-        String login = request.getParameter("login");
-        String senha = request.getParameter("senha");
-        String tipo = request.getParameter("tipo");
-        
-        RetornaUsuario result = new RetornaUsuario(login, senha);
-        
-        if(tipo.toUpperCase().equals("GERENTE")){
-            Gerente gerente = result.getGerente();
-            sessao.setAttribute("usuario", gerente);
-            response.sendRedirect("Gerente/index.jsp");
-        }
-        else if(tipo.toUpperCase().equals("CABELEREIRO")){
-            Cabelereiro cabelereiro = result.getCabelereiro();
-            sessao.setAttribute("usuario", cabelereiro);
-            response.sendRedirect("Cabelereiro/index.jsp");
-        }
-        else if(tipo.toUpperCase().equals("CLIENTE")){
-            Cliente cliente = result.getCliente();
-            sessao.setAttribute("usuario", cliente);
-            response.sendRedirect("Cliente/index.jsp");
-        }
-        else{
-            
-        }
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        if (request.getSession(false) != null) {
+            request.getSession().invalidate();
+        }
+
+        request.getRequestDispatcher("index.html").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession sessao = request.getSession();
+
+        String login = request.getParameter("login");
+        String senha = request.getParameter("senha");
+        String tipo = request.getParameter("tipo");
+
+        RetornaUsuario result = new RetornaUsuario(login, senha);
+
+        if (tipo.toUpperCase().equals("GERENTE")) {
+            Gerente gerente = result.getGerente();
+            sessao.setAttribute("usuario", gerente);
+            response.sendRedirect("Gerente/index.jsp");
+        } else if (tipo.toUpperCase().equals("CABELEREIRO")) {
+            Cabelereiro cabelereiro = result.getCabelereiro();
+            sessao.setAttribute("usuario", cabelereiro);
+            response.sendRedirect("Cabelereiro/index.jsp");
+        } else if (tipo.toUpperCase().equals("CLIENTE")) {
+            Cliente cliente = result.getCliente();
+            sessao.setAttribute("usuario", cliente);
+            response.sendRedirect("Cliente/index.jsp");
+        } else {
+
+        }
     }
 
 }
