@@ -5,11 +5,9 @@
  */
 package controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +18,6 @@ import model.Gerente;
 import model.JPAUtil;
 import model.Servico;
 import model.Subservico;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  *
@@ -33,19 +29,13 @@ public class CadastrarServicoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String r = request.getParameter("value");
+        String nomeServico = request.getParameter("nome");
+        String descricao = request.getParameter("descricao");
+        String tempoMedio = request.getParameter("tempomedio");
+        String pausa = request.getParameter("pausa");
+        String tempoRestante = request.getParameter("temporestante");
         
         SimpleDateFormat data = new SimpleDateFormat("HH:mm");
-        
-        JSONArray array = new JSONArray(r);
-        JSONObject objeto = array.getJSONObject(0);
-        
-        String nomeServico = objeto.getString("nome");
-        String descricao = objeto.getString("descricao");
-        String tempoMedio = objeto.getString("tempomedio");
-        String pausa = objeto.getString("pausa");
-        String tempoRestante = objeto.getString("temporestante");
-        
         Servico servico = null;
                 
         try{
@@ -54,17 +44,16 @@ public class CadastrarServicoController extends HttpServlet {
             e.printStackTrace();
         }
         
-        for(int i = 1; i < array.length(); i++){
-            JSONObject obj = array.getJSONObject(i);
+        Integer qtdServ = Integer.parseInt(request.getParameter("qtdsub"));
+        for(Integer i = 1; i < qtdServ; i++){
             
-            String nomeSub = obj.getString("nome");
-            String valor = obj.getString("valor");
+            String nomeSub = request.getParameter("nomeSub"+i);
+            String valorSub = request.getParameter("valorSub"+i);
             
-            Subservico sub = new Subservico(nomeSub, Float.parseFloat(valor));
+            Subservico sub = new Subservico(nomeSub, Float.parseFloat(valorSub));
             
             servico.setSubServ(sub);
         }
-        
         
         EntityManager em = JPAUtil.getInstance().getEntityManager();
         Gerente g = em.find(Gerente.class, ((Gerente)request.getSession().getAttribute("usuario")).getId());

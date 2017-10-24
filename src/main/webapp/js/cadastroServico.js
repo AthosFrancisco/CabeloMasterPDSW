@@ -35,24 +35,36 @@ function submeterFormulario(){
 
 function adicionarSubservico(){
     
+    var qtdSub = parseInt(document.forms[0].qtdsub.value)+1;
+    document.forms[0].qtdsub.value = qtdSub;
+    
     var nome = document.createElement("INPUT");
-    nome.name = "nomeServico";
+    nome.name = "nomeSub"+qtdSub;
     nome.type = "text";
     
     var valor = document.createElement("INPUT");
-    valor.name = "valorServico";
+    valor.name = "valorSub"+qtdSub;
     valor.type = "text";
+    
+    var labelNome = document.createElement("LABEL");
+    labelNome.for = "nomeSub"+qtdSub;
+    labelNome.appendChild(document.createTextNode("Nome: "));
+    
+    var labelValor = document.createElement("LABEL");
+    labelValor.for = "valorSub"+qtdSub;
+    labelValor.appendChild(document.createTextNode("Valor: "));
+    
     
     var subservico = document.getElementById("subservicos");
     
+    subservico.appendChild(labelNome);
     subservico.appendChild(nome);
+    subservico.appendChild(labelValor);
     subservico.appendChild(valor);
+    subservico.appendChild(document.createElement("BR"));
 }
 
 onload = function(){
     var botao = document.getElementById("botao");
     botao.onclick = adicionarSubservico;
-    
-    var submeter = document.getElementById("submeter");
-    submeter.onclick = submeterFormulario;
 };

@@ -25,14 +25,19 @@
             <input name="pausa" type="time"/>
             <label for="temporestante">Tempo Restante:</label>
             <input name="temporestante" type="time"/>
+            
+            <button type="button" id="botao">Adicionar Subserviço</button>
+
+            <input name="qtdsub" value="0" type="text"/>
+
+            <div id="subservicos">
+
+            </div>
+
+            <button type="submit" id="submeter">Enviar</button>
+            
         </form>
         
-        <button type="button" id="botao">Adicionar Subserviço</button>
         
-        <div id="subservicos">
-                
-        </div>
-
-        <button type="submit" id="submeter">Enviar</button>
     </body>
 </html>
