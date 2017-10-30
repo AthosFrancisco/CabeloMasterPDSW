@@ -26,15 +26,17 @@
                 <div class="navbar-header">
                     <img src="img/cabelo.jpg" height="60" width="60" class="img-circle navbar-left"/>
                     <h1 class="navbar-text navbar-left">Cabelo Master</h1>
+                    <a href="Gerente/index.jsp" class="btn bnt-default navbar-bnt">Início</a>
+                    <a href="ListarServicos" class="btn bnt-default navbar-bnt">Listar Serviços</a>
                 </div>
             </div>
         </nav>
         <div class="container">
             <h1>Editar Servico</h1>
-            <form action="../EditarServicoController" method="post">
+            <form action="EditarServicoController" method="post">
                 <div class="form-group">
                     <label for="codigo">Código:</label>
-                    <input type="text" name="nome" placeholder="Nome..." class="form-control" value="${requestScope.servico.id}" readonly="readonly"/>
+                    <input type="text" name="codigo" class="form-control" value="${requestScope.servico.id}" readonly="readonly"/>
                 </div>
                 <div class="form-group">
                     <label for="nome">Nome:</label>
@@ -59,11 +61,13 @@
 
                 <button type="button" id="botao">Adicionar Subserviço</button>
 
-                <input name="qtdsub" value="${requestScope.servico.subServ.size()}" type="text"/>
+                <input name="qtdsub" value="0" type="text"/>
 
                 <div id="subservicos">
                     <c:forEach var="s" items="${requestScope.servico.subServ}">
-                        <label ></label>
+                        <label>Nome: ${s.nome}</label>
+                        <label>Valor: ${s.valor}</label>
+                        <a href="EditarServicoController?acao=remover&codigoItem=${s}&codigo=${requestScope.servico.id}">Remover</a><br/>
                     </c:forEach>
                 </div>
 

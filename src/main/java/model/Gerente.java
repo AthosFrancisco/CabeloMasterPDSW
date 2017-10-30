@@ -34,6 +34,7 @@ public class Gerente extends Usuario implements Serializable{
         return cabelereiro;
     }
 
+    //cadastrar cabelereiro
     public void setCabelereiro(Cabelereiro cabelereiro) {
         if(cabelereiro == null){
             this.cabelereiro = new ArrayList<>();
