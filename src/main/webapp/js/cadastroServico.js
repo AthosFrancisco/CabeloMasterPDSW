@@ -47,11 +47,11 @@ function adicionarSubservico(){
     valor.type = "text";
     
     var labelNome = document.createElement("LABEL");
-    labelNome.for = "nomeSub"+qtdSub;
+    labelNome.setAttribute("for", "nomeSub"+qtdSub);
     labelNome.appendChild(document.createTextNode("Nome: "));
     
     var labelValor = document.createElement("LABEL");
-    labelValor.for = "valorSub"+qtdSub;
+    labelValor.setAttribute("for", "valorSub"+qtdSub);
     labelValor.appendChild(document.createTextNode("Valor: "));
     
     

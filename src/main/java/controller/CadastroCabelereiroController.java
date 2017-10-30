@@ -54,7 +54,9 @@ public class CadastroCabelereiroController extends HttpServlet {
         g.setCabelereiro(cab);
         em.getTransaction().commit();
         
-        request.getRequestDispatcher("ListarCabelereiros").forward(request, response);
+        request.setAttribute("lista", g.getCabelereiro());
+        
+        request.getRequestDispatcher("Gerente/listaCabelereiros.jsp").forward(request, response);
     }
 
 

@@ -20,13 +20,13 @@ public class TesteConexao {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bancomaster");
         EntityManager em = emf.createEntityManager();
         
-//        Gerente g = new Gerente("Athos", "09236474114", "athos@gmail.com", "123", 'M');
-//        g.setEndereco(new Endereco("53170280", "rua antonio berenguer", "passarinho", 358, "", "Olinda", "PE"));
-//        
-//        em.getTransaction().begin();
-//        em.persist(g);
-//        em.getTransaction().commit();
-//        em.close();
+        Gerente g = new Gerente("Athos", "09236474114", "athos@gmail.com", "123", 'M');
+        g.setEndereco(new Endereco("53170280", "rua antonio berenguer", "passarinho", 358, "", "Olinda", "PE"));
+        
+        em.getTransaction().begin();
+        em.persist(g);
+        em.getTransaction().commit();
+        em.close();
 
 //        Gerente g = em.find(Gerente.class, 1);
 //        Query q = em.createQuery("select g from Gerente g where g.nome = :nome and g.senha = :senha");

@@ -8,6 +8,7 @@ package controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,7 +46,7 @@ public class CadastrarServicoController extends HttpServlet {
         }
         
         Integer qtdServ = Integer.parseInt(request.getParameter("qtdsub"));
-        for(Integer i = 1; i < qtdServ; i++){
+        for(int i = 1; i <= qtdServ; i++){
             
             String nomeSub = request.getParameter("nomeSub"+i);
             String valorSub = request.getParameter("valorSub"+i);
@@ -59,7 +60,9 @@ public class CadastrarServicoController extends HttpServlet {
         Gerente g = em.find(Gerente.class, ((Gerente)request.getSession().getAttribute("usuario")).getId());
         g.cadastrarServico(servico);
         
-        request.getRequestDispatcher("ListarServicos").forward(request, response);
+        List<Servico> lista = em.createQuery("select s from Servico s").getResultList();
+        request.setAttribute("lista", lista);
+        request.getRequestDispatcher("Gerente/listaServicos.jsp").forward(request, response);
     }
 
     @Override

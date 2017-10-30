@@ -32,7 +32,7 @@ public class TestGerente {
         }
     }
     
-    @Test
+    //@Test
     public void testExcluir(){
         EntityManager em = JPAUtil.getInstance().getEntityManager();
         
